@@ -1,0 +1,9 @@
+line = \
+"inner join (select upset.id, avg(pa.overall_rating) as rh{hi} 
+  from upset, player_attributes as pa
+  where upset.home_player_{hi} = pa.player_api_id and pa.overall_rating is not null and
+        (pa.date between adddate(adddate(upset.date, interval -6 month), interval 1 day) and upset.date)
+   group by upset.id) as h{hi} on h{hi}.id = ans.id;"
+
+for i in range(1, 12):
+    print(line.format(hi=i))
